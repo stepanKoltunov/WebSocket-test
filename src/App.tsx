@@ -12,12 +12,15 @@ function App() {
                 const data = JSON.parse(event.data);
                 const newPrice = parseFloat(data.p);
                 setPrice(newPrice);
-            };
-            return () => {
-                if (socketData.current) {
-                    socketData.current.close();
-                }
-            };
+            }
+        } else {
+            socketData.current?.close();
+            setPrice(null);
+        }
+        return () => {
+            if (socketData.current) {
+                socketData.current.close();
+            }
         }
     },[btnValue])
 
